@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid ">
+    <a class="navbar-brand" >Youtube</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item  ">
+          <a class="nav-link navbaralignment col-sm-3 ">
+           <%= link_to 'Home', root_path, :class => "so-class post-title" %></a>
+        </li>
+      
+        <li class="nav-item px-2" >
+          <a class="nav-link navbaralignment" >
+            <%= link_to 'Playlists',playlists_path, :class=> "so-class post-title" %></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+           <% @categories = Category.all %>
+            <% @categories.each do |category| %>
+          <li><a class="dropdown-item" href="#"> <%= link_to category.name, root_path(category_id: category.id)%></a></li>
+              <% end %>    
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+         <%=form_with url: "/",method: :get do |form| %>
+        <%=form.text_field :name,:class=>"form-control mr-sm-2 " %>  
+         <button class="btn btn-outline-success my-2 my-sm-0 " type="submit " style="margin: 6px;">Search</button>
+         <%end%> 
+      </from>
+
+        <%if user_signed_in?%>     
+             <button class="btn btn-outline-success  "> 
+              <%= link_to 'Sign_out', destroy_user_session_path,:class => "some-class",method: :delete%>  </butto>
+                <%else%>
+              <button class="btn btn-outline-success ">   
+                <%=link_to "login",new_user_session_path %></button>
+      <% end %>
+    </div>
+  </div>
+</nav> 

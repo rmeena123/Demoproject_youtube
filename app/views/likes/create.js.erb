@@ -1,0 +1,7 @@
+$('.like_<%= @post.id %>').removeClass('far fa-thumbs-up');
+$('.like_<%= @post.id %>').addClass('fa-solid fa-thumbs-up');
+$('.count_<%= @post.id %>').html('<%= @post.count %>'); 
+
+$('.unlike_<%= @post.id %>').removeClass('far fa-thumbs-up');
+$('.unlike_<%= @post.id %>').addClass('fa-solid fa-thumbs-up');
+$('.uncount_<%= @post.id %>').html('<%= @post.count %>'); 

@@ -1,0 +1,46 @@
+</br></br>
+
+<div class="container-fluid ">
+  <div class="row">
+   <div class="col"> 
+    <%=video_tag url_for(@post.video), :size=>"1180x680", :controls =>true,preview: true if @post.video.attached? %>
+           <% if current_user.playlists.find_by(post_id: @post).present?%>           
+             <button class="btn btn-outline-secondary button mt-1 ">Added To  Playlist</button>
+                <%else%>
+            <button class="btn btn-outline-primary button mt-1 <%= "Add_#{@post.id}" %>"> 
+            <%= link_to 'Add to playlist',playlists_path(post_id: @post),:method => :post, :remote => true %></button>
+            <%end%>
+          <% if current_user.likes.find_by(post_id: @post).present?%>
+
+            <%= link_to likes_path(post_id: @post), :method => :post, :remote => true do %>
+              <b class= "<%= "uncount_#{@post.id}" %> "> <%= @post.count %> </b>
+             <i class="fa-solid fa-thumbs-up <%= "unlike_#{@post.id}" %>"></i></br> 
+             <% end %>
+          <%else%>
+            <%= link_to likes_path(post_id: @post), :method => :post, :remote => true do %>
+
+             <b class= "<%= "count_#{@post.id}" %> "> <%= @post.count %> </b>
+             <i class="far fa-thumbs-up <%="like_#{@post.id}" %> "></i> </br>
+            <% end %>
+          <% end %>
+       
+         <b><%=@post.name %></b></br><font size="2"> <%=Category.find_by(id:@post.category_id).name%></font>
+        </br><%= render 'comments/comment' %>
+       </div>
+       <div class="col">
+       <%=render 'list' %>
+       </div>
+  </div>
+ </div>
+
+
+    
+
+              
+                
+                  
+
+
+
+
+

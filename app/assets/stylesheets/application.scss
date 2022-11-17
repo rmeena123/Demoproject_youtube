@@ -1,0 +1,137 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+ */
+ 
+ @import "bootstrap";
+ @import "font-awesome";
+
+.some-class{
+   color: green;  
+}
+
+.so-class{
+   color: white;  
+   margin-bottom: 10px;
+}
+
+.form-group {
+        margin-bottom: 15px;
+}
+.space{
+   
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+}
+
+.navbaralignment{
+
+   margin-bottom: -9px;
+}
+.resize {
+   resize: text;
+
+}
+.tagspace{
+
+   float: right;
+}
+.center1{
+
+   margin-rigth: 00;
+}
+.container-wide{
+  max-width: 430px;
+  min-width: 900px;
+  margin: 1px 300px 20px 400px;
+}
+.like {
+   color: red;
+}
+
+.unlike {
+   color: black;
+}
+.hover1
+ { transform: scale(1.1); }
+
+
+.zoom:hover {
+  -ms-transform: scale(1.2); /* IE 9 */
+  -webkit-transform: scale(1.2); /* Safari 3-8 */
+  transform: scale(1.1); 
+}
+
+.button {
+  float: right;
+}
+
+.my_class {
+   color: black;
+    width: 20000000000px;
+}
+
+.container {
+    max-width: 50%;
+    }
+.post-title  {
+     text-decoration: none;
+ }
+
+ #text {
+    outline: none;
+    box-sizing: content-box;
+    border-width: 0px 0px 1px;
+      width:100%;
+    }
+ .submit
+ {
+ border: none;
+    outline: none;
+ }
+
+ .rshift
+ {
+     float: right;
+ }
+
+ .main-header {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-contrast-low);
+}
+
+.main-header__nav-label { // menu label
+  color: var(--color-contrast-medium);
+}
+
+.main-header__nav-link { // link within list item
+  color: var(--color-contrast-higher);
+
+  &[aria-current] { // style of selected link
+    color: var(--color-primary);
+  }
+}
+
+@function saturation($color, $saturationMultiplier){
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  $color-h: var(#{$color+'-h'});
+  $color-s: var(#{$color+'-s'});
+  $color-l: var(#{$color+'-l'});
+  @return hsl($color-h, calc(#{$color-s} * #{$saturationMultiplier}), $color-l);
+}
+
+.component {
+  background-color: saturation(var(--color-primary), 1.2);
+}
