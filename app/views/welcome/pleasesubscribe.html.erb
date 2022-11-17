@@ -1,0 +1,33 @@
+<head>
+  <body class ="bg-dark">
+<div class="container" style = "max-width: 850px;"> 
+  <% flash.each do |type, msg| %>
+   <div class="alert alert-info text-center">
+     <%= msg %>
+   </div>
+  <% end %>
+    </br>
+  <div class="container" style="max-width: 55%;">
+    <div class="card text-center" style="width: 30rem;">
+      <div class="card-body ">
+        <h5 class=" text-center">Select plan to subscribe</h5><br>
+        <%= form_tag subscriptions_path, method: :post do  %>  
+          <% plans = SubscribtionPlan.all%>
+          <% plans.each do |plan| %>  
+          <div style="padding: 20px;">
+          <%= radio_button_tag :subscribtion_plan_id, plan.id%> <%= plan.plan_type%> | 
+          <%= plan.amount.to_i%> INR  </div>
+        <%end%> 
+          <br>
+          <button  class="btn btn-outline-secondary ">Subscribe</button>  
+      </div>
+      <%end%>
+     </div>
+    </div>
+  </div>
+</div>
+</body>
+</head>
+
+
+
