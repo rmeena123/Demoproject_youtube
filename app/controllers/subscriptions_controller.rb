@@ -14,9 +14,9 @@ class SubscriptionsController < ApplicationController
 
 	def update_subcription
 		payment_response = {
-        razorpay_order_id: params[:razorpay_payment_id],
-        razorpay_payment_id: params[:razorpay_subscription_id],
-        razorpay_signature: params[:razorpay_signature]
+        razorpay_order_id: params[:razorpay_payment_id].to_s,
+        razorpay_payment_id: params[:razorpay_subscription_id].to_s,
+        razorpay_signature: params[:razorpay_signature].to_s
       }
     verify_signature = Razorpay::Utility.verify_payment_signature(payment_response)
 		@subscription = current_user.subscriptions.find_by(razorpay_subscription_id: params[:razorpay_subscription_id])
