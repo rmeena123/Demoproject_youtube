@@ -23,12 +23,14 @@
              <i class="far fa-thumbs-up <%="like_#{@post.id}" %> "></i> </br>
             <% end %>
           <% end %>
-       
-         <b><%=@post.name %></b></br><font size="2"> <%=Category.find_by(id:@post.category_id).name%></font>
+       <%@category = Category.find_by(id:@post.category_id)%>  
+         <b><%=@post.name %></b></br><font size="2"> <%= @category.name%></font>
         </br><%= render 'comments/comment' %>
        </div>
+       
        <div class="col">
        <%=render 'list' %>
+
        </div>
   </div>
  </div>
