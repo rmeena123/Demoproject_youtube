@@ -58,5 +58,7 @@ gem 'bootstrap'
 gem 'jquery-rails'  
 gem "font-awesome-sass", "~> 6.2.0"
 gem 'razorpay'
+gem 'i18n-js'
+  
 
 

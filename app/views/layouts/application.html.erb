@@ -9,11 +9,13 @@
   </head>
   
   <body> 
+    <%= tag.body class: [dark_mode: cookies['dark_mode'] == 'isActive'], data: {locale: I18n.locale} do %>
     <%= render 'layouts/header' %>   
+  <button class="dark-mode-toggle">🌓</button>
     
     <%= yield %>
+  </div>
     <%#= render 'layouts/footer' %>    
+  <% end %>
 
   </body>
-</html>
-    
