@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :category
   has_one_attached :video
   has_one_attached :image
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :playlists
   has_many :users, through: :playlists
