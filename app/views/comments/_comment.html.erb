@@ -7,10 +7,9 @@
        <%= text_field_tag (:text)%>
        <%= submit_tag("comment",:class => "submit") %>
    <% end %>
-  
    <% @post.comments.each do |comment| %>
        <%= comment.text %>
-   <%  if comment.user.id == current_user.id  %>
+   <%  if comment.user.id == current_user.id %>
       <%= link_to 'Remove',  comments_path(post_id: @post), :method => :delete, 
       :class =>"rshift" %></br> 
      <%else%>
@@ -18,4 +17,3 @@
      <% end %>
    <% end %>
    <br>
- 
