@@ -34,6 +34,7 @@ class SubscriptionsController < ApplicationController
 
 	  if verify_signature && @subscription.present?
 	     @subscription.update(razorpay_payment_id: params[:razorpay_payment_id], end_time: end_date)
+	 	  UserMailer.with(subscription_mail: @subscription).successfull_subscription_email.deliver_later          
           redirect_to welcome_index_path 
 	  else
        redirect_to pay_subscriptions_path(subscription_id: @subscription.id)

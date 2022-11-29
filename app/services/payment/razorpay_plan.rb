@@ -15,7 +15,6 @@
         }
         razorpay_plan = Razorpay::Plan.create(para_attr)
         plan.razorpay_plan_id = razorpay_plan.id
-       # store_plan_id(plan)        
       end
 
       def create_subscription(subscription)

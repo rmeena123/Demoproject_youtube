@@ -5,7 +5,7 @@ ActiveAdmin.register Post do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :post_type, :duration, :category_id, :video, :image, :disable
+  permit_params :name, :description, :post_type, :duration, :category_id, :video, :image, :disable, :admin_user_id, :email, :text, :user_id, :post_id 
   #
   # or
   #
@@ -16,7 +16,7 @@ ActiveAdmin.register Post do
   # end
  
   config.sort_order = "count_asc"
-  config.per_page = 2
+  config.per_page = 10
 
   filter :category
   filter :post_type
@@ -41,6 +41,7 @@ ActiveAdmin.register Post do
     index do
       selectable_column
       id_column
+
       column :category
       column :name  
       column :description
@@ -70,14 +71,29 @@ ActiveAdmin.register Post do
       row :duration
       row :created_at
       row :updated_at
-      row :disable 
-      row "likes count", :count
+      row :disable  
+      row :current_admin_user_email do
+      current_admin_user.try(:email)
+      end 
+
       row :image do |ad|
         image_tag url_for(ad.image), size: "200x100", :controls => true   if ad.image.attached?
       end
       row :video do |ad|
         video_tag url_for(ad.video), size: "200x100", :controls => true   if ad.video.attached?
       end
+
+
+     table_for post.comments do
+       column "comments" do |comment|
+          comment.text
+       end
+       
+       column "Commenter" do |comment|
+         comment.user.email
+       end 
+
+    end
     end
   end
 
@@ -93,6 +109,30 @@ ActiveAdmin.register Post do
         post.update(disable: false)
       end
        redirect_to collection_path, alert: "The posts have been Enable"
+    end
+
+    controller do 
+      def create
+        params[:post] = params[:post].merge(admin_user_id:current_admin_user.id)
+        super do 
+          if resource.errors.any?  
+            flash[:error] = resource.errors.full_messages.to_sentence
+            redirect_to(new_admin_post_path)and return
+          else
+            flash[:notice] = "Created Successfully"
+            redirect_to(admin_posts_path)and return
+         end
+        end
+      end
+    end
+
+    controller do
+      def index
+        index! do |format|
+          @posts =  current_admin_user.posts.where(admin_user_id: current_admin_user.id).page(params[:page]).per(10)
+          format.html
+        end
+      end
     end
 
 end

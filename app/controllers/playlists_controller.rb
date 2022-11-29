@@ -12,6 +12,8 @@ class PlaylistsController < ApplicationController
  	def destroy
  		@playlist = Playlist.find_by(id: params[:id])
  		@playlist.destroy
+    @playlist_name = @playlist.post.name
+    UserMailer.with(name: @playlist_name,current_user: current_user).playlist_destroy_email.deliver_now       
     redirect_to playlists_path
  	end
 
