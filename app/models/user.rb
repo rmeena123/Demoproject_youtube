@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :subscriptions
   has_many :subscribtion_plans, through: :subscriptions
 
+
   after_create :usermailer
   def usermailer
     UserMailer.with(user: self).welcome_email.deliver_later
