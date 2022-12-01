@@ -34,7 +34,9 @@ class Ability
       can :manage, :all
     else
       can :manage, Post
+      can :read, SubscribtionPlan
     end
+
 
 
   end

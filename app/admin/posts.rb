@@ -83,17 +83,17 @@ ActiveAdmin.register Post do
         video_tag url_for(ad.video), size: "200x100", :controls => true   if ad.video.attached?
       end
 
-
-     table_for post.comments do
-       column "comments" do |comment|
-          comment.text
-       end
-       
-       column "Commenter" do |comment|
-         comment.user.email
-       end 
-
-    end
+      panel "Comments" do
+         table_for post.comments do
+           column "comments" do |comment|
+              comment.text
+           end
+           
+           column "Commenter" do |comment|
+             comment.user.email
+           end 
+        end
+      end
     end
   end
 
